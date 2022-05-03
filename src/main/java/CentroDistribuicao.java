@@ -16,23 +16,33 @@ public class CentroDistribuicao {
 
   /**
    * O método construtor recebe as quantidades iniciais de gasolina nos tanques e ajusta a “situação” de acordo.
+   * Caso algum dos parâmetros tenha valor inválido o método deve gerar uma ILLEGAL_ARGUMENT_EXCEPTION
+   * (isso vale também para quantidades iniciais de álcool que devem ser iguais).
    */
-  public CentroDistribuicao(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2) {
-    if (tAditivo > 0 && tAditivo <= MAX_ADITIVO) {
+  public CentroDistribuicao(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2) throws IllegalArgumentException {
+    if (tAlcool1 != tAlcool2) {
+      throw new IllegalArgumentException("Quantidade de Álcool diferente!");
+    }
+
+    if (tAditivo < 0 || tGasolina < 0 || tAlcool1 < 0) {
+      throw new IllegalArgumentException("Argumentos inválidos!");
+    }
+
+    if (tAditivo <= MAX_ADITIVO) {
       aditivo = tAditivo;
     }
 
-    if (tGasolina > 0 && tGasolina <= MAX_GASOLINA) {
+    if (tGasolina <= MAX_GASOLINA) {
       gasolina = tGasolina;
     }
 
     //Capacidade do primeiro Tanque é 1250L
-    if (tAlcool1 > 0 && tAlcool1 <= (MAX_ALCOOL / 2)) {
+    if (tAlcool1 <= (MAX_ALCOOL / 2)) {
       alcool1 = tAlcool1;
     }
 
     //Capacidade do segundo Tanque é 1250L
-    if (tAlcool2 > 0 && tAlcool2 <= (MAX_ALCOOL / 2)) {
+    if (tAlcool2 <= (MAX_ALCOOL / 2)) {
       alcool2 = tAlcool2;
     }
 

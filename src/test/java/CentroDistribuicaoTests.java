@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class CentroDistribuicaoTests {
 
@@ -84,5 +85,33 @@ public class CentroDistribuicaoTests {
   public void recebeGasolinaLimite() {
     CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 8000, 0, 0);
     assertEquals(2000, centroDistribuicao.recebeGasolina(2001));
+  }
+
+  @Test
+  public void alcoolDiferenteTest() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, 0, 1);
+    });
+  }
+
+  @Test
+  public void aditivoNegativoTest() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      CentroDistribuicao centroDistribuicao = new CentroDistribuicao(-1, 0, 0, 0);
+    });
+  }
+
+  @Test
+  public void gasolinaNegativaTest() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, -1, 0, 0);
+    });
+  }
+
+  @Test
+  public void alcoolNegativoTest() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, -1, -1);
+    });
   }
 }
