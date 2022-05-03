@@ -268,32 +268,29 @@ public class CentroDistribuicao {
     double targetAlcool = qtdade * 0.25;
     double targetGasolina = qtdade * 0.7;
 
-    //Separação Extra pros tanque de Alcool
+    // Separação Extra pros tanque de Alcool
     double a1 = Math.floor(targetAlcool / 2);
     double a2 = Math.floor(targetAlcool / 2);
 
+    // Verificação da quantidade de Aditivo necessário
+    if (gettAditivo() < targetAditivo) {
+      valores[0] = -21;
+      return valores;
+    }
 
-    if (atual == SITUACAO.NORMAL) {
-      if (gettAditivo() < targetAditivo) {
-        valores[0] = -21;
-        return valores;
-      }
+    // Verificação da quantidade de Álcool necessário
+    if (gettAlcool1() < a1 || gettAlcool2() < a2) {
+      valores[0] = -21;
+      return valores;
+    }
 
-      if (gettAlcool1() < a1) {
-        valores[0] = -21;
-        return valores;
-      }
+    // Verificação da quantidade de Gasolina necessário
+    if (gettGasolina() < targetGasolina) {
+      valores[0] = -21;
+      return valores;
+    }
 
-      if (gettAlcool2() < a2) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      if (gettGasolina() < targetGasolina) {
-        valores[0] = -21;
-        return valores;
-      }
-
+    if (atual == SITUACAO.NORMAL || (atual == SITUACAO.SOBRAVISO && tipoPosto == TIPOPOSTO.ESTRATEGICO)) {
       aditivo = (int) (aditivo - targetAditivo);
       alcool1 = (int) (alcool1 - a1);
       alcool2 = (int) (alcool2 - a2);
@@ -301,35 +298,14 @@ public class CentroDistribuicao {
 
       defineSituacao();
 
-      //aditivo, gasolina, álcool T1 e álcool T2.
+      // Aditivo, gasolina, álcool T1 e álcool T2.
       valores[0] = gettAditivo();
       valores[1] = gettGasolina();
       valores[2] = gettAlcool1();
       valores[3] = gettAlcool2();
-
-      //return valores;
     }
 
-    if (atual == SITUACAO.SOBRAVISO && tipoPosto == TIPOPOSTO.COMUM) {
-      if (gettAditivo() < targetAditivo) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      if (gettAlcool1() < a1) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      if (gettAlcool2() < a2) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      if (gettGasolina() < targetGasolina) {
-        valores[0] = -21;
-        return valores;
-      }
+    if ((atual == SITUACAO.SOBRAVISO && tipoPosto == TIPOPOSTO.COMUM) || (atual == SITUACAO.EMERGENCIA && tipoPosto == TIPOPOSTO.ESTRATEGICO)) {
 
       aditivo = (int) (aditivo - Math.floor(targetAditivo / 2));
       alcool1 = (int) (alcool1 - Math.floor(a1 / 2));
@@ -342,85 +318,11 @@ public class CentroDistribuicao {
       valores[1] = gettGasolina();
       valores[2] = gettAlcool1();
       valores[3] = gettAlcool2();
-
-      //return valores;
-    }
-
-    if (atual == SITUACAO.SOBRAVISO && tipoPosto == TIPOPOSTO.ESTRATEGICO) {
-      if (gettAditivo() < targetAditivo) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      if (gettAlcool1() < a1) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      if (gettAlcool2() < a2) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      if (gettGasolina() < targetGasolina) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      aditivo = (int) (aditivo - targetAditivo);
-      alcool1 = (int) (alcool1 - a1);
-      alcool2 = (int) (alcool2 - a2);
-      gasolina = (int) (gasolina - targetGasolina);
-
-      defineSituacao();
-
-      valores[0] = gettAditivo();
-      valores[1] = gettGasolina();
-      valores[2] = gettAlcool1();
-      valores[3] = gettAlcool2();
-
-      //return valores;
     }
 
     if (atual == SITUACAO.EMERGENCIA && tipoPosto == TIPOPOSTO.COMUM) {
       valores[0] = -14;
       return valores;
-    }
-
-    if (atual == SITUACAO.EMERGENCIA && tipoPosto == TIPOPOSTO.ESTRATEGICO) {
-      if (gettAditivo() < targetAditivo) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      if (gettAlcool1() < a1) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      if (gettAlcool2() < a2) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      if (gettGasolina() < targetGasolina) {
-        valores[0] = -21;
-        return valores;
-      }
-
-      aditivo = (int) (aditivo - Math.floor(targetAditivo / 2));
-      alcool1 = (int) (alcool1 - Math.floor(a1 / 2));
-      alcool2 = (int) (alcool2 - Math.floor(a2 / 2));
-      gasolina = (int) (gasolina - Math.floor(targetGasolina / 2));
-
-      defineSituacao();
-
-      valores[0] = gettAditivo();
-      valores[1] = gettGasolina();
-      valores[2] = gettAlcool1();
-      valores[3] = gettAlcool2();
-
-      //return valores;
     }
 
     return valores;
