@@ -269,8 +269,8 @@ public class CentroDistribuicao {
     double targetGasolina = qtdade * 0.7;
 
     //Separação Extra pros tanque de Alcool
-    double a1 = targetAlcool / 2;
-    double a2 = targetAlcool / 2;
+    double a1 = Math.floor(targetAlcool / 2);
+    double a2 = Math.floor(targetAlcool / 2);
 
 
     if (atual == SITUACAO.NORMAL) {
@@ -331,10 +331,10 @@ public class CentroDistribuicao {
         return valores;
       }
 
-      aditivo = (int) (aditivo - (targetAditivo / 2));
-      alcool1 = (int) (alcool1 - (a1 / 2));
-      alcool2 = (int) (alcool2 - (a2 / 2));
-      gasolina = (int) (gasolina - (targetGasolina / 2));
+      aditivo = (int) (aditivo - Math.floor(targetAditivo / 2));
+      alcool1 = (int) (alcool1 - Math.floor(a1 / 2));
+      alcool2 = (int) (alcool2 - Math.floor(a2 / 2));
+      gasolina = (int) (gasolina - Math.floor(targetGasolina / 2));
 
       defineSituacao();
 
@@ -408,10 +408,10 @@ public class CentroDistribuicao {
         return valores;
       }
 
-      aditivo = (int) (aditivo - (targetAditivo / 2));
-      alcool1 = (int) (alcool1 - (a1 / 2));
-      alcool2 = (int) (alcool2 - (a2 / 2));
-      gasolina = (int) (gasolina - (targetGasolina / 2));
+      aditivo = (int) (aditivo - Math.floor(targetAditivo / 2));
+      alcool1 = (int) (alcool1 - Math.floor(a1 / 2));
+      alcool2 = (int) (alcool2 - Math.floor(a2 / 2));
+      gasolina = (int) (gasolina - Math.floor(targetGasolina / 2));
 
       defineSituacao();
 

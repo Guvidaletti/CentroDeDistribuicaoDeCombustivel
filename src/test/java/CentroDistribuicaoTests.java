@@ -1,8 +1,6 @@
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 public class CentroDistribuicaoTests {
 
@@ -13,9 +11,24 @@ public class CentroDistribuicaoTests {
     assertEquals(-7, resp[0]);
   }
 
-//  @Test
-//  public void mudouSituacaoAoAbastecerTest() {}
-//
-//  @Test
-//  public void mudouSituacaoAoEnviarPedidoTest() {}
+  @Test
+  public void faltouAditivoParaFazerAMistura() {
+    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(399, 9000, 1250, 1250);
+    int[] resp = centroDistribuicao.encomendaCombustivel(8001, CentroDistribuicao.TIPOPOSTO.COMUM);
+    assertEquals(-21, resp[0]);
+  }
+
+  @Test
+  public void faltouGasolinaParaFazerAMistura() {
+    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(401, 5000, 1250, 1250);
+    int[] resp = centroDistribuicao.encomendaCombustivel(8000, CentroDistribuicao.TIPOPOSTO.COMUM);
+    assertEquals(-21, resp[0]);
+  }
+
+  @Test
+  public void faltouAlcoolParaFazerAMistura() {
+    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(401, 9000, 700, 700);
+    int[] resp = centroDistribuicao.encomendaCombustivel(8000, CentroDistribuicao.TIPOPOSTO.COMUM);
+    assertEquals(-21, resp[0]);
+  }
 }
