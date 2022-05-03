@@ -331,10 +331,10 @@ public class CentroDistribuicao {
         return valores;
       }
 
-      aditivo = (int) ((aditivo - targetAditivo) / 2);
-      alcool1 = (int) ((alcool1 - a1) / 2);
-      alcool2 = (int) ((alcool2 - a2) / 2);
-      gasolina = (int) ((gasolina - targetGasolina) / 2);
+      aditivo = (int) (aditivo - targetAditivo / 2);
+      alcool1 = (int) (alcool1 - (a1 / 2));
+      alcool2 = (int) (alcool2 - (a2 / 2));
+      gasolina = (int) (gasolina - (targetGasolina / 2));
 
       defineSituacao();
 
