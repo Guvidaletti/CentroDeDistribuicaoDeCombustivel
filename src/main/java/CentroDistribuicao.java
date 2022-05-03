@@ -257,7 +257,7 @@ public class CentroDistribuicao {
   public int[] encomendaCombustivel(int qtdade, TIPOPOSTO tipoPosto) {
 
     SITUACAO atual = getSituacao();
-    int[] valores = new int[3];
+    int[] valores = new int[4];
 
     if (qtdade <= 0) {
       valores[0] = -7;
