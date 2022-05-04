@@ -1,36 +1,25 @@
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 public class CentroDistribuicaoTests {
 
-  @Test
-  public void parametroInvalidoTest() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(400, 9000, 1000, 1000);
-    int[] resp = centroDistribuicao.encomendaCombustivel(-50, CentroDistribuicao.TIPOPOSTO.COMUM);
-    assertEquals(-7, resp[0]);
-  }
 
-  @Test
-  public void faltouAditivoParaFazerAMistura() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(399, 9000, 1250, 1250);
-    int[] resp = centroDistribuicao.encomendaCombustivel(8001, CentroDistribuicao.TIPOPOSTO.COMUM);
-    assertEquals(-21, resp[0]);
-  }
-
-  @Test
-  public void faltouGasolinaParaFazerAMistura() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(401, 5000, 1250, 1250);
-    int[] resp = centroDistribuicao.encomendaCombustivel(8000, CentroDistribuicao.TIPOPOSTO.COMUM);
-    assertEquals(-21, resp[0]);
-  }
-
-  @Test
-  public void faltouAlcoolParaFazerAMistura() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(401, 9000, 700, 700);
-    int[] resp = centroDistribuicao.encomendaCombustivel(8000, CentroDistribuicao.TIPOPOSTO.COMUM);
-    assertEquals(-21, resp[0]);
+  @ParameterizedTest
+  @CsvSource({
+          "400, 9000, 1000, 1000, -50, -7",
+          "399, 9000, 1250, 1250, 8001, -21",
+          "401, 5000, 1250, 1250, 8000, -21",
+          "401, 9000, 700, 700, 8000, -21"
+  })
+  public void encomendaCombustivelTest(int tAditivo, int tGasolina, int tAlcool1, int tAlcoo2, int qtidade, int esperado) {
+    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(tAditivo, tGasolina, tAlcool1, tAlcoo2);
+    int[] resp = centroDistribuicao.encomendaCombustivel(qtidade, CentroDistribuicao.TIPOPOSTO.COMUM);
+    assertEquals(esperado, resp[0]);
   }
 
   @Test
@@ -87,31 +76,17 @@ public class CentroDistribuicaoTests {
     assertEquals(2000, centroDistribuicao.recebeGasolina(2001));
   }
 
-  @Test
-  public void alcoolDiferenteTest() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, 0, 1);
-    });
-  }
+  @ParameterizedTest
+  @CsvSource({
+          "0, 0, 0, 1",
+          "-1, 0, 0, 0",
+          "0, -1, 0, 0",
+          "0, 0, -1, -1"
 
-  @Test
-  public void aditivoNegativoTest() {
+  })
+  public void construtorTest(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2) {
     assertThrows(IllegalArgumentException.class, () -> {
-      CentroDistribuicao centroDistribuicao = new CentroDistribuicao(-1, 0, 0, 0);
-    });
-  }
-
-  @Test
-  public void gasolinaNegativaTest() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, -1, 0, 0);
-    });
-  }
-
-  @Test
-  public void alcoolNegativoTest() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, -1, -1);
+      CentroDistribuicao centroDistribuicao = new CentroDistribuicao(tAditivo, tGasolina, tAlcool1, tAlcool2);
     });
   }
 }
