@@ -22,58 +22,37 @@ public class CentroDistribuicaoTests {
     assertEquals(esperado, resp[0]);
   }
 
-  @Test
-  public void recebeAditivoErro() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, 0, 0);
-    assertEquals(-1, centroDistribuicao.recebeAditivo(0));
+  @ParameterizedTest
+  @CsvSource({
+          "0, 0, 0, 0, -1, 0",
+          "0, 0, 0, 0, 100, 100",
+          "450, 0, 0, 0, 50, 51",
+  })
+  public   void recebeAditivo(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2, int esperado, int qtidade) {
+    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(tAditivo, tGasolina, tAlcool1, tAlcool2);
+    assertEquals(esperado, centroDistribuicao.recebeAditivo(qtidade));
   }
 
-  @Test
-  public void recebeAlcoolErro() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, 0, 0);
-    assertEquals(-1, centroDistribuicao.recebeAlcool(0));
+  @ParameterizedTest
+  @CsvSource({
+          "0, 0, 0, 0, -1, 0",
+          "0, 0, 0, 0, 100, 100",
+          "0, 8000, 0, 0, 2000, 2001",
+  })
+  public   void recebeGasolina(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2, int esperado, int qtidade) {
+    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(tAditivo, tGasolina, tAlcool1, tAlcool2);
+    assertEquals(esperado, centroDistribuicao.recebeGasolina(qtidade));
   }
 
-  @Test
-  public void recebeGasolinaErro() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, 0, 0);
-    assertEquals(-1, centroDistribuicao.recebeGasolina(0));
-  }
-
-  @Test
-  public void recebeAditivoNormal() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, 0, 0);
-    assertEquals(100, centroDistribuicao.recebeAditivo(100));
-  }
-
-  @Test
-  public void recebeAlcoolNormal() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, 0, 0);
-    assertEquals(100, centroDistribuicao.recebeAlcool(100));
-  }
-
-  @Test
-  public void recebeGasolinaNormal() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, 0, 0);
-    assertEquals(100, centroDistribuicao.recebeGasolina(100));
-  }
-
-  @Test
-  public void recebeAditivoLimite() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(450, 0, 0, 0);
-    assertEquals(50, centroDistribuicao.recebeAditivo(51));
-  }
-
-  @Test
-  public void recebeAlcoolLimite() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 0, 1200, 1200);
-    assertEquals(100, centroDistribuicao.recebeAlcool(102));
-  }
-
-  @Test
-  public void recebeGasolinaLimite() {
-    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(0, 8000, 0, 0);
-    assertEquals(2000, centroDistribuicao.recebeGasolina(2001));
+  @ParameterizedTest
+  @CsvSource({
+          "0, 0, 0, 0, -1, 0",
+          "0, 0, 0, 0, 100, 100",
+          "0, 0, 1200, 1200, 100, 102",
+  })
+  public void recebeAlcool(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2, int esperado, int qtidade) {
+    CentroDistribuicao centroDistribuicao = new CentroDistribuicao(tAditivo, tGasolina, tAlcool1, tAlcool2);
+    assertEquals(esperado, centroDistribuicao.recebeAlcool(qtidade));
   }
 
   @ParameterizedTest
