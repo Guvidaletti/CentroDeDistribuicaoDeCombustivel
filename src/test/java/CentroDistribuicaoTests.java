@@ -8,7 +8,6 @@ import static org.junit.Assert.assertThrows;
 
 public class CentroDistribuicaoTests {
 
-
   @ParameterizedTest
   @CsvSource({
           "400, 9000, 1000, 1000, -50, -7",
@@ -28,7 +27,7 @@ public class CentroDistribuicaoTests {
           "0, 0, 0, 0, 100, 100",
           "450, 0, 0, 0, 50, 51",
   })
-  public   void recebeAditivo(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2, int esperado, int qtidade) {
+  public   void recebeAditivoTest(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2, int esperado, int qtidade) {
     CentroDistribuicao centroDistribuicao = new CentroDistribuicao(tAditivo, tGasolina, tAlcool1, tAlcool2);
     assertEquals(esperado, centroDistribuicao.recebeAditivo(qtidade));
   }
@@ -39,7 +38,7 @@ public class CentroDistribuicaoTests {
           "0, 0, 0, 0, 100, 100",
           "0, 8000, 0, 0, 2000, 2001",
   })
-  public   void recebeGasolina(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2, int esperado, int qtidade) {
+  public   void recebeGasolinaTest(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2, int esperado, int qtidade) {
     CentroDistribuicao centroDistribuicao = new CentroDistribuicao(tAditivo, tGasolina, tAlcool1, tAlcool2);
     assertEquals(esperado, centroDistribuicao.recebeGasolina(qtidade));
   }
@@ -50,7 +49,7 @@ public class CentroDistribuicaoTests {
           "0, 0, 0, 0, 100, 100",
           "0, 0, 1200, 1200, 100, 102",
   })
-  public void recebeAlcool(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2, int esperado, int qtidade) {
+  public void recebeAlcoolTest(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2, int esperado, int qtidade) {
     CentroDistribuicao centroDistribuicao = new CentroDistribuicao(tAditivo, tGasolina, tAlcool1, tAlcool2);
     assertEquals(esperado, centroDistribuicao.recebeAlcool(qtidade));
   }
