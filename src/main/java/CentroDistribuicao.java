@@ -88,16 +88,16 @@ public class CentroDistribuicao {
     }
 
     //Menos de 50% de Alcool e acima de 25%
-    if (gettAlcool1() < 625 && gettAlcool1() >= 312) {
+    if (gettAlcool1() <= 625 && gettAlcool1() >= 312) {
       situacao = SITUACAO.SOBRAVISO;
     }
 
-    if (gettAlcool2() < 625 && gettAlcool2() >= 312) {
+    if (gettAlcool2() <= 625 && gettAlcool2() >= 312) {
       situacao = SITUACAO.SOBRAVISO;
     }
 
     //Menos de 50% de Gasolina e acima de 25%
-    if (gettGasolina() < 5000 && gettGasolina() >= 2500) {
+    if (gettGasolina() <= 5000 && gettGasolina() >= 2500) {
       situacao = SITUACAO.SOBRAVISO;
     }
 
