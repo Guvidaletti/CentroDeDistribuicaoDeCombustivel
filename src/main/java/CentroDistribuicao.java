@@ -67,14 +67,14 @@ public class CentroDistribuicao {
 
     //SITUAÇÃO NORMAL
     //50% de Aditivo
-    if (gettAditivo() >= 250) {
+    if (gettAditivo() > 250) {
 
       //50% de Alcool
-      if (gettAlcool1() >= 625) {
-        if (gettAlcool2() >= 625) {
+      if (gettAlcool1() > 625) {
+        if (gettAlcool2() > 625) {
 
           //50% de Gasolina
-          if (gettGasolina() >= 5000) {
+          if (gettGasolina() > 5000) {
             situacao = SITUACAO.NORMAL;
           }
         }
