@@ -74,7 +74,8 @@ public class CentroDistribuicao {
         if (gettAlcool2() >= 625) {
 
           //50% de Gasolina
-          if (gettGasolina() >= 5000) {
+          if (gettGasolina() >=
+                  5000) {
             situacao = SITUACAO.NORMAL;
           }
         }
