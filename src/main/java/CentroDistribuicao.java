@@ -67,14 +67,15 @@ public class CentroDistribuicao {
 
     //SITUAÇÃO NORMAL
     //50% de Aditivo
-    if (gettAditivo() > 250) {
+    if (gettAditivo() >= 250) {
 
       //50% de Alcool
-      if (gettAlcool1() > 625) {
-        if (gettAlcool2() > 625) {
+      if (gettAlcool1() >= 625) {
+        if (gettAlcool2() >= 625) {
 
           //50% de Gasolina
-          if (gettGasolina() > 5000) {
+          if (gettGasolina() >=
+                  5000) {
             situacao = SITUACAO.NORMAL;
           }
         }
@@ -88,16 +89,16 @@ public class CentroDistribuicao {
     }
 
     //Menos de 50% de Alcool e acima de 25%
-    if (gettAlcool1() <= 625 && gettAlcool1() >= 312) {
+    if (gettAlcool1() < 625 && gettAlcool1() >= 312) {
       situacao = SITUACAO.SOBRAVISO;
     }
 
-    if (gettAlcool2() <= 625 && gettAlcool2() >= 312) {
+    if (gettAlcool2() < 625 && gettAlcool2() >= 312) {
       situacao = SITUACAO.SOBRAVISO;
     }
 
     //Menos de 50% de Gasolina e acima de 25%
-    if (gettGasolina() <= 5000 && gettGasolina() >= 2500) {
+    if (gettGasolina() < 5000 && gettGasolina() >= 2500) {
       situacao = SITUACAO.SOBRAVISO;
     }
 
