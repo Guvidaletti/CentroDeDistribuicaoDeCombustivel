@@ -30,12 +30,10 @@ public class CentroDistribuicao {
   // ajusta situação de acordo com as regras. Deve ser chamado pelo método
   // encomendaCombustível.
   public void defineSituacao() {
-    if (getAditivo() < (MAX_ADITIVO / 2) || getGasolina() < (MAX_GASOLINA / 2)
-      || (getAlcool1() + getAlcool2()) < (MAX_ALCOOL / 2)) {
-      situacaoAtual = SITUACAO.SOBRAVISO;
-    } else if (getAditivo() < (MAX_ADITIVO / 4) || getGasolina() < (MAX_GASOLINA / 4)
-      || (getAlcool1() + getAlcool2()) < (MAX_ALCOOL / 4)) {
+    if (getAditivo() < (MAX_ADITIVO / 4) || getGasolina() < (MAX_GASOLINA / 4) || (getAlcool1() + getAlcool2()) < (MAX_ALCOOL / 4)) {
       situacaoAtual = SITUACAO.EMERGENCIA;
+    } else if (getAditivo() < (MAX_ADITIVO / 2) || getGasolina() < (MAX_GASOLINA / 2) || (getAlcool1() + getAlcool2()) < (MAX_ALCOOL / 2)) {
+      situacaoAtual = SITUACAO.SOBRAVISO;
     } else {
       situacaoAtual = SITUACAO.NORMAL;
     }
@@ -64,20 +62,17 @@ public class CentroDistribuicao {
   // metodos recebe[...] devem retornar o quanto armazenaram de acordo com o
   // tamanho do tanque. Devem retornar -1 caso o parametro seja invalido.
   private boolean validaGasolina(int novaGasolina) {
-    if (novaGasolina > MAX_GASOLINA)
-      return false;
+    if (novaGasolina > MAX_GASOLINA) return false;
     return true;
   }
 
   private boolean validaÁlcool(int novoAlcool) {
-    if (novoAlcool > MAX_ALCOOL)
-      return false;
+    if (novoAlcool > MAX_ALCOOL) return false;
     return true;
   }
 
   private boolean validaAditivo(int novoAditivo) {
-    if (novoAditivo > MAX_ADITIVO)
-      return false;
+    if (novoAditivo > MAX_ADITIVO) return false;
     return true;
   }
 
@@ -117,9 +112,7 @@ public class CentroDistribuicao {
     int[] tanqueAtual = new int[4];
     switch (getSituacao()) {
       case NORMAL:
-        if (validaAditivo(getAditivo() - (qtdade / 20)) &&
-          validaGasolina(getGasolina() - (qtdade / 10 * 7)) &&
-          validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8))) {
+        if (validaAditivo(getAditivo() - (qtdade / 20)) && validaGasolina(getGasolina() - (qtdade / 10 * 7)) && validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8))) {
           tAditivo -= (qtdade / 20);
           tGasolina -= ((qtdade / 10) * 7);
           tAlcool1 -= (qtdade / 8);
@@ -137,9 +130,7 @@ public class CentroDistribuicao {
       case SOBRAVISO:
         if (tipoPosto == TIPOPOSTO.COMUM) {
 
-          if (validaAditivo(getAditivo() - (qtdade / 40)) &&
-            validaGasolina(getGasolina() - (qtdade / 20 * 7)) &&
-            validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8))) {
+          if (validaAditivo(getAditivo() - (qtdade / 40)) && validaGasolina(getGasolina() - (qtdade / 20 * 7)) && validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8))) {
             tAditivo -= (qtdade / 40);
             tGasolina -= ((qtdade / 20) * 7);
             tAlcool1 -= (qtdade / 16);
@@ -154,9 +145,7 @@ public class CentroDistribuicao {
           }
 
         } else {
-          if (validaAditivo(getAditivo() - (qtdade / 20)) &&
-            validaGasolina(getGasolina() - (qtdade / 10 * 7)) &&
-            validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8))) {
+          if (validaAditivo(getAditivo() - (qtdade / 20)) && validaGasolina(getGasolina() - (qtdade / 10 * 7)) && validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8))) {
             tAditivo -= (qtdade / 20);
             tGasolina -= ((qtdade / 10) * 7);
             tAlcool1 -= (qtdade / 8);
@@ -176,9 +165,7 @@ public class CentroDistribuicao {
         if (tipoPosto == TIPOPOSTO.COMUM) {
           tanqueAtual[0] = -14;
         } else {
-          if (validaAditivo(getAditivo() - (qtdade / 40)) &&
-            validaGasolina(getGasolina() - (qtdade / 20 * 7)) &&
-            validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8))) {
+          if (validaAditivo(getAditivo() - (qtdade / 40)) && validaGasolina(getGasolina() - (qtdade / 20 * 7)) && validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8))) {
             tAditivo -= (qtdade / 40);
             tGasolina -= ((qtdade / 20) * 7);
             tAlcool1 -= (qtdade / 16);
@@ -199,8 +186,7 @@ public class CentroDistribuicao {
 
   @Override
   public String toString() {
-    return "CentroDistribuicao [tAditivo=" + tAditivo + ", tAlcool1=" + tAlcool1 + ", tAlcool2=" + tAlcool2
-      + ", tGasolina=" + tGasolina + "]";
+    return "CentroDistribuicao [tAditivo=" + tAditivo + ", tAlcool1=" + tAlcool1 + ", tAlcool2=" + tAlcool2 + ", tGasolina=" + tGasolina + "]";
   }
 
   public static void main(String[] args) {
