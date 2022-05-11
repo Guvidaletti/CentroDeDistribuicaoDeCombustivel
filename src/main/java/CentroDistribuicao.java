@@ -19,7 +19,13 @@ public class CentroDistribuicao {
   private SITUACAO situacaoAtual;
   private TIPOPOSTO tipoPosto;
 
-  public CentroDistribuicao(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2) {
+  public CentroDistribuicao(int tAditivo, int tGasolina, int tAlcool1, int tAlcool2) throws IllegalArgumentException {
+    if (tAlcool1 != tAlcool2) {
+      throw new IllegalArgumentException("Alcool não pode ser diferente!");
+    }
+    if (tAditivo < 0 || tGasolina < 0 || tAlcool1 < 0) {
+      throw new IllegalArgumentException("Não pode ser um número negativo!");
+    }
     this.tAditivo = tAditivo;
     this.tGasolina = tGasolina;
     this.tAlcool1 = tAlcool1;
@@ -110,9 +116,10 @@ public class CentroDistribuicao {
 
   public int[] encomendaCombustivel(int qtdade, TIPOPOSTO tipoPosto) {
     int[] tanqueAtual = new int[4];
+    boolean validacao = validaAditivo(getAditivo() - (qtdade / 20)) && validaGasolina(getGasolina() - (qtdade / 10 * 7)) && validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8));
     switch (getSituacao()) {
       case NORMAL:
-        if (validaAditivo(getAditivo() - (qtdade / 20)) && validaGasolina(getGasolina() - (qtdade / 10 * 7)) && validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8))) {
+        if (validacao) {
           tAditivo -= (qtdade / 20);
           tGasolina -= ((qtdade / 10) * 7);
           tAlcool1 -= (qtdade / 8);
@@ -179,9 +186,7 @@ public class CentroDistribuicao {
           }
         }
         break;
-    }
-    System.out.println(toString());
-    return tanqueAtual;
+    } return tanqueAtual;
   }
 
   @Override
