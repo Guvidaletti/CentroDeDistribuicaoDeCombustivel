@@ -26,10 +26,25 @@ public class CentroDistribuicao {
     if (tAditivo < 0 || tGasolina < 0 || tAlcool1 < 0) {
       throw new IllegalArgumentException("Não pode ser um número negativo!");
     }
-    this.tAditivo = tAditivo;
-    this.tGasolina = tGasolina;
-    this.tAlcool1 = tAlcool1;
-    this.tAlcool2 = tAlcool2;
+
+    if (tAditivo <= MAX_ADITIVO) {
+      this.tAditivo = tAditivo;
+    }
+
+    if (tGasolina <= MAX_GASOLINA) {
+      this.tGasolina = tGasolina;
+    }
+
+    //Capacidade do primeiro Tanque é 1250L
+    if (tAlcool1 <= (MAX_ALCOOL / 2)) {
+      this.tAlcool1 = tAlcool1;
+    }
+
+    //Capacidade do segundo Tanque é 1250L
+    if (tAlcool2 <= (MAX_ALCOOL / 2)) {
+      this.tAlcool2 = tAlcool2;
+    }
+
     defineSituacao();
   }
 
@@ -116,10 +131,9 @@ public class CentroDistribuicao {
 
   public int[] encomendaCombustivel(int qtdade, TIPOPOSTO tipoPosto) {
     int[] tanqueAtual = new int[4];
-    boolean validacao = validaAditivo(getAditivo() - (qtdade / 20)) && validaGasolina(getGasolina() - (qtdade / 10 * 7)) && validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8));
     switch (getSituacao()) {
       case NORMAL:
-        if (validacao) {
+        if (validaAditivo(getAditivo() - (qtdade / 20)) && validaGasolina(getGasolina() - (qtdade / 10 * 7)) && validaÁlcool((getAlcool1() + getAlcool2()) - (qtdade / 8))) {
           tAditivo -= (qtdade / 20);
           tGasolina -= ((qtdade / 10) * 7);
           tAlcool1 -= (qtdade / 8);
@@ -186,7 +200,8 @@ public class CentroDistribuicao {
           }
         }
         break;
-    } return tanqueAtual;
+    }
+    return tanqueAtual;
   }
 
   @Override
